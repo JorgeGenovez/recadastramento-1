@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos/style_recadastramento.css">
+    <title>Recadastramento</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+</head>
+<body>
+    <div id="conteiner">
+        <main id="tela_de_load" v-show="guia_atual == 'tela_de_load'">
+            Salvando
+        </main>
+        <main id="formulario" v-show="guia_atual == 'formulario'">
+            <div class="conteiner_input">
+                <button @click="voltaropcao">Voltar</button>
+                <button @click="carregarMembro">Carregar Membro</button>
+            </div>
+            <div class="conteiner_input">
+                <label for="fileInput">Foto</label>
+                <input type="file" id="fileInput" accept="image/*">
+            </div>
+            <div class="conteiner_input">
+                <label for="matricula">Matrícula</label>
+                <input type="text" id="matricula" name="matricula" v-model="membro['Matrícula']">
+            </div>
+            <div class="conteiner_input">
+                <label for="nome_completo">Nome completo</label>
+                <input type="text" id="nome_completo" name="nome_completo" v-model="membro['Nome Completo']">
+            </div>
+            <div class="conteiner_input">
+                <label for="data_de_nascimento">Data de nascimento</label>
+                <input type="text" id="data_de_nascimento" name="data_de_nascimento" v-model="membro['Data de Nascimento']">
+            </div>
+            <div class="conteiner_input">
+                <label for="tipo_sanguineo">Tipo Sanguíneo</label>
+                <input type="text" id="tipo_sanguineo" name="tipo_sanguineo" v-model="membro['Tipo Sanguíneo']">
+            </div>
+            <div class="conteiner_input">
+                <label for="naturalidade">Naturalidade</label>
+                <input type="text" id="naturalidade" name="naturalidade" v-model="membro['naturalidade']">
+            </div>
+            <div class="conteiner_input">
+                <label for="nacionalidade">Nacionalidade</label>
+                <input type="text" id="nacionalidade" name="nacionalidade" v-model="membro['Nacionalidade']">
+            </div>
+            <div class="conteiner_input">
+                <label for="cargo_atual">Cargo Atual</label>
+                <input type="text" id="cargo_atual" name="cargo_atual" v-model="membro['Cargo Atual']">
+            </div>
+            <div class="conteiner_input">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" v-model="membro['e-mail']" autocomplete="email">
+            </div>            
+            <div class="conteiner_input">
+                <label for="telefone_residencial">Telefone Residencial</label>
+                <input type="text" id="telefone_residencial" name="telefone_residencial" v-model="membro['Tel. Residencial']">
+            </div>
+            <div class="conteiner_input">
+                <label for="telefone_celular">Celular</label>
+                <input type="text" id="telefone_celular" name="telefone_celular" v-model="membro['Celular']">
+            </div>
+            <div class="conteiner_input">
+                <label for="cep">CEP</label>
+                <input type="text" id="cep" name="cep" v-model="membro['CEP']">
+                <button @click="consultar_cep">Consultar CEP</button>
+            </div>
+            <div class="conteiner_input">
+                <label for="estado">Estado</label>
+                <input type="text" id="estado" name="estado" v-model="membro['Estado']">
+            </div>
+            <div class="conteiner_input">
+                <label for="cidade">Cidade</label>
+                <input type="text" id="cidade" name="cidade" v-model="membro['Cidade']">
+            </div>
+            <div class="conteiner_input">
+                <label for="bairro">Bairro</label>
+                <input type="text" id="bairro" name="bairro" v-model="membro['Bairro']">
+            </div>
+            <div class="conteiner_input">
+                <label for="rua">Rua</label>
+                <input type="text" id="rua" name="rua" v-model="membro['Rua']">
+            </div>
+            <div class="conteiner_input">
+                <label for="complemento">Complemento</label>
+                <input type="text" id="complemento" name="complemento" v-model="membro['Complemento']">
+            </div>
+            <div class="conteiner_input">
+                <label for="data_de_batismo">Data de Batismo</label>
+                <input type="text" id="data_de_batismo" name="data_de_batismo" v-model="membro['Databatismo']">
+            </div>
+            <div class="conteiner_input">
+                <label for="igreja_de_batismo">Igreja de Batismo</label>
+                <input type="text" id="igreja_de_batismo" name="igreja_de_batismo" placeholder="Igreja de Batismo" v-model="membro['Igreja']">
+            </div>
+            <div class="conteiner_input">
+                <label for="bairro_da_igreja_de_batismo">Bairro da Igreja de Batismo</label>
+                <input type="text" id="bairro_da_igreja_de_batismo" name="bairro_da_igreja_de_batismo" placeholder="Bairro da Igreja de Batismo">
+            </div>
+            <div class="conteiner_input">
+                <label for="data_em_que_virou_membro">Data em que virou membro</label>
+                <input type="text" id="data_em_que_virou_membro" name="data_em_que_virou_membro" v-model="membro['Data Membro']">
+            </div>
+            <div class="conteiner_input">
+                <label for="modo">Como entrou na PIB</label>
+                <input type="text" id="modo" name="modo" placeholder="Como entrou na PIB" v-model="membro['Modo']">
+            </div>
+            <div class="conteiner_input">
+                <label for="pai_eh_membro">Pai é membro?</label>
+                <select id="pai_eh_membro" name="pai_eh_membro">
+                    <option value=""></option>
+                    <option value="sim">Sim</option>
+                    <option value="nao">Não</option>
+                </select>
+            </div>
+            <div class="conteiner_input">
+                <label for="nome_do_pai">Nome do Pai</label>
+                <input type="text" id="nome_do_pai" name="nome_do_pai" v-model="membro['Nome do Pai']">
+            </div>
+            <div class="conteiner_input">
+                <label for="mae_eh_membro">Mãe é membro?</label>
+                <select id="mae_eh_membro" name="mae_eh_membro">
+                    <option value=""></option>
+                    <option value="sim">Sim</option>
+                    <option value="nao">Não</option>
+                </select>
+            </div>
+            <div class="conteiner_input">
+                <label for="nome_mae">Nome da Mãe</label>
+                <input type="text" id="nome_mae" name="nome_mae" v-model="membro['Nome da Mãe']">
+            </div>
+            <div class="conteiner_input">
+                <label for="estado_civil">Estado Civil</label>
+                <input type="text" id="estado_civil" name="estado_civil" v-model="membro['Estado Civil']">
+            </div>
+            <div class="conteiner_input">
+                <label for="conjuge_eh_membro">Cônjuge é membro?</label>
+                <select id="conjuge_eh_membro" name="conjuge_eh_membro">
+                    <option value=""></option>
+                    <option value="sim">Sim</option>
+                    <option value="nao">Não</option>
+                </select>
+            </div>
+            <div class="conteiner_input">
+                <label for="nome_conjuge">Nome do Cônjuge</label>
+                <input type="text" id="nome_conjuge" name="nome_conjuge" placeholder="Nome do cônjuge" v-model="membro['Nome']">
+            </div>
+            <div class="conteiner_input">
+                <label for="data_de_nascimento_do_conjuge">Data de Nascimento do Cônjuge</label>
+                <input type="text" id="data_de_nascimento_do_conjuge" name="data_de_nascimento_do_conjuge" placeholder="Data de nascimento do cônjuge" v-model="membro['Nascimento']">
+            </div>
+            <div class="conteiner_input">
+                <label for="data_de_casamento">Data de Casamento</label>
+                <input type="text" id="data_de_casamento" name="data_de_casamento" v-model="membro['Data de Casamento']">
+            </div>
+            <div class="conteiner_input">
+                <label for="nome_do_filho1">Nome do Filho 1</label>
+                <input type="text" id="nome_do_filho1" name="nome_do_filho1" placeholder="Nome do filho 1">
+            </div>
+            <div class="conteiner_input">
+                <label for="filho1_eh_membro">Filho 1 é membro?</label>
+                <select id="filho1_eh_membro" name="filho1_eh_membro">
+                    <option value=""></option>
+                    <option value="sim">Sim</option>
+                    <option value="nao">Não</option>
+                </select>
+            </div>
+            <div class="conteiner_input">
+                <label for="data_de_nascimento_do_filho1">Data de Nascimento do Filho 1</label>
+                <input type="text" id="data_de_nascimento_do_filho1" name="data_de_nascimento_do_filho1" placeholder="Data de nascimento do filho 1">
+            </div>
+            <div class="conteiner_input">
+                <label for="nome_do_filho2">Nome do Filho 2</label>
+                <input type="text" id="nome_do_filho2" name="nome_do_filho2" placeholder="Nome do filho 2">
+            </div>
+            <div class="conteiner_input">
+                <label for="filho2_eh_membro">Filho 2 é membro?</label>
+                <select id="filho2_eh_membro" name="filho2_eh_membro">
+                    <option value=""></option>
+                    <option value="sim">Sim</option>
+                    <option value="nao">Não</option>
+                </select>
+            </div>
+            <div class="conteiner_input">
+                <label for="data_de_nascimento_do_filho2">Data de Nascimento do Filho 2</label>
+                <input type="text" id="data_de_nascimento_do_filho2" name="data_de_nascimento_do_filho2" placeholder="Data de nascimento do filho 2">
+            </div>
+            
+            <div class="conteiner_input">
+                <label for="nome_do_filho3">Nome do Filho 3</label>
+                <input type="text" id="nome_do_filho3" name="nome_do_filho3" placeholder="Nome do filho 3">
+            </div>
+            <div class="conteiner_input">
+                <label for="filho3_eh_membro">Filho 3 é membro?</label>
+                <select id="filho3_eh_membro" name="filho3_eh_membro">
+                    <option value=""></option>
+                    <option value="sim">Sim</option>
+                    <option value="nao">Não</option>
+                </select>
+            </div>
+            <div class="conteiner_input">
+                <label for="data_de_nascimento_do_filho3">Data de Nascimento do Filho 3</label>
+                <input type="text" id="data_de_nascimento_do_filho3" name="data_de_nascimento_do_filho3" placeholder="Data de nascimento do filho 3">
+            </div>
+            
+            <div class="conteiner_input">
+                <label for="nome_do_filho4">Nome do Filho 4</label>
+                <input type="text" id="nome_do_filho4" name="nome_do_filho4" placeholder="Nome do filho 4">
+            </div>
+            <div class="conteiner_input">
+                <label for="filho4_eh_membro">Filho 4 é membro?</label>
+                <select id="filho4_eh_membro" name="filho4_eh_membro">
+                    <option value=""></option>
+                    <option value="sim">Sim</option>
+                    <option value="nao">Não</option>
+                </select>
+            </div>
+            <div class="conteiner_input">
+                <label for="data_de_nascimento_do_filho4">Data de Nascimento do Filho 4</label>
+                <input type="text" id="data_de_nascimento_do_filho4" name="data_de_nascimento_do_filho4" placeholder="Data de nascimento do filho 4">
+            </div>
+            
+            <div class="conteiner_input">
+                <label for="nome_do_filho5">Nome do Filho 5</label>
+                <input type="text" id="nome_do_filho5" name="nome_do_filho5" placeholder="Nome do filho 5">
+            </div>
+            <div class="conteiner_input">
+                <label for="filho5_eh_membro">Filho 5 é membro?</label>
+                <select id="filho5_eh_membro" name="filho5_eh_membro">
+                    <option value=""></option>
+                    <option value="sim">Sim</option>
+                    <option value="nao">Não</option>
+                </select>
+            </div>
+            <div class="conteiner_input">
+                <label for="data_de_nascimento_do_filho5">Data de Nascimento do Filho 5</label>
+                <input type="text" id="data_de_nascimento_do_filho5" name="data_de_nascimento_do_filho5" placeholder="Data de nascimento do filho 5">
+            </div>
+            <div class="conteiner_input">
+                <input type="submit" placeholder="Salvar" id="submit_form" @click="salvar_membro">
+            </div>
+            
+            
+            
+            
+        </main>
+    </div>
+    
+    <script src="formulario_script.js"></script>
+</body>
+</html>

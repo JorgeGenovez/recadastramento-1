@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos/style_recadastramento.css">
+    <title>Recadastramento</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+</head>
+<body>
+    <div id="conteiner">
+        <main id="tela_inicial" v-show="guia_atual == 'tela_inicial'">
+            <div id="conteiner_titulos">
+                <h1>Recadastramento de Membros</h1>
+                <h2>PIB Pavuna</h2>
+            </div>
+            <div id="conteiner_procurar_membro">
+                <input type="text" id="procurar_membro" placeholder="Procurar membro..." @input="pesquisar_membros($event.target.value)">
+                <div id="conteiner_opcoes_membros">
+                    <div class="opcao_membro" v-for="membro in opcoes_membros" @click="buscar_por_membro(membro)">{{ membro }}</div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="recadastro_script.js"></script>
+</body>
+</html>

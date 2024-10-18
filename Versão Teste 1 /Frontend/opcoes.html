@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIB Pavuna</title>
+
+    <link rel="stylesheet" href="estilos/style_opcoes.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+</head>
+<body>
+    <div id="conteiner_opcoes">
+        <div class="opcao" @click="ir_para('recadastro.html')">Recadastramento</div>
+        <div class="opcao" @click="ir_para('formulario.html')">Novo Cadastro</div> 
+    </div>
+
+    <script>
+        const app = Vue.createApp({
+            methods: {
+                ir_para(caminho)
+                {
+                    window.location.href = `${caminho}`;
+                }
+            }
+        })
+        const appVM = app.mount('#conteiner_opcoes')
+    </script>
+</body>
+</html>
