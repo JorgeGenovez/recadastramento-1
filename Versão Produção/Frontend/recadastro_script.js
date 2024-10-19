@@ -19,7 +19,7 @@ const app = Vue.createApp({
         },
         async buscar_por_membro(membro)
         {
-            const promise = await fetch(`http://localhost:8025/buscar_por_membro`, {
+            const promise = await fetch(`http://delport.com.br:8025/buscar_por_membro`, {
                 method: 'POST',
                 body: new URLSearchParams({
                     nome: membro
@@ -38,7 +38,7 @@ const app = Vue.createApp({
         }
     },
     mounted() {
-        const socket = io("http://localhost:8025", {
+        const socket = io(""http://delport.com.br:8025", {
             query: { token: localStorage.token }
         });
 
