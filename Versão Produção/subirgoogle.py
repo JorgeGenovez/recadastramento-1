@@ -9,7 +9,7 @@ from googleapiclient.errors import HttpError
 def confirmando(dados, link, quem_cadastrou):
     SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
     SPREADSHEET_ID = "197dGyWjtAVUVR2K8eODfIxfrEFgeErTcxMhp3OIX8N0"
-    RANGE_NAME = "Dados!A1:AY3000"
+    RANGE_NAME = "DadosNovo!A1:AY3000"
 
     creds = None
     Stoken = "Stoken.json"
