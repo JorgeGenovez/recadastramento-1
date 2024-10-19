@@ -93,7 +93,7 @@ const app = Vue.createApp({
             formData.append("data_de_nascimento_do_filho5", document.getElementsByName('data_de_nascimento_do_filho5')[0].value)
 
             this.guia_atual = 'tela_de_load'
-            const promise = await fetch('http://localhost:8025/salvar_membro', {
+            const promise = await fetch('http://delport.com.br:8025/salvar_membro', {
                 method: 'POST',
                 body: formData,
                 headers: {
@@ -106,7 +106,7 @@ const app = Vue.createApp({
         },
         async consultar_cep()
         {
-            const promise = await fetch(`http://localhost:8025/consultar_cep`, {
+            const promise = await fetch(`http://delport.com.br:8025/consultar_cep`, {
                 method: 'POST',
                 body: new URLSearchParams({
                     cep: document.getElementsByName('cep')[0].value
@@ -125,7 +125,7 @@ const app = Vue.createApp({
         }
     },
     mounted() {
-        const socket = io("http://localhost:8025", {
+        const socket = io("http://delport.com.br:8025", {
             query: { token: localStorage.token }
         });
 
