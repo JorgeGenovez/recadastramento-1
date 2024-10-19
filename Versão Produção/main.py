@@ -14,7 +14,7 @@ from subirgoogle import confirmando
 from cep import consulta_cep
 
 app = Flask(__name__)
-socketio = SocketIO(app, cors_allowed_origins=["http://127.0.0.1:5500"])
+socketio = SocketIO(app, cors_allowed_origins=["*", "null", "http://cadastro.pibpavuna.com.br"])
 CORS(app)
 SECRET_KEY = 'KJBlkjbKLGbNKGufjhB3s4s654dsa354fgGBKlm54654KJEHGIRNTHRTH54R6H544865iohKG'
 
