@@ -26,7 +26,7 @@ const app = Vue.createApp({
     },
     methods: {
         voltaropcao(){
-            window.location.href = `opcoes.html`
+            window.location.href = `https://cadastro.pibpavuna.com.br/opcoes.html`
         },
         carregarMembro() {
             const membroData = localStorage.getItem('membro');
