@@ -102,7 +102,7 @@ const app = Vue.createApp({
             });
             const response = await promise.json()
             this.formData = response
-            window.location.href = `opcoes.html`
+            window.location.href = `https://cadastro.pibpavuna.com.br/opcoes.html`
         },
         async consultar_cep()
         {
