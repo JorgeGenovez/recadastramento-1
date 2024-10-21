@@ -32,7 +32,7 @@ const app = Vue.createApp({
             localStorage.setItem('membro', JSON.stringify(resp));
             this.membro = resp
             this.opcoes_membros = []
-            window.location.href = `formulario.html`
+            window.location.href = `https://cadastro.pibpavuna.com.br/formulario.html`
             console.log(resp)
     
         }
