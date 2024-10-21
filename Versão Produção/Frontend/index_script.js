@@ -23,7 +23,7 @@ const app = Vue.createApp({
                 return
             }
             localStorage.setItem('token', resp.token)
-            window.location.href = `http://cadastro.pibpavuna.com.br/opcoes.html`
+            window.location.href = `https://cadastro.pibpavuna.com.br/opcoes.html`
         }   
     }
 })
