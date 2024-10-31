@@ -1,5 +1,6 @@
 from flask import Flask
 import os
+import json
 import pandas as pd
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -33,7 +34,9 @@ def download_csv():
                 token.write(creds.to_json())
 
         service = build('drive', 'v3', credentials=creds)
-        file_id = '1WtuPyPqtV0gZnnoPhLZLY1qfmgPNAv9vQDqK4NV6LQo'
+        with open('Dados.json') as json_file:
+            file_id = json.load(json_file)['SECRET_KEY']
+
         request = service.files().export_media(fileId=file_id, mimeType='text/csv')
         file_content = request.execute()
 
