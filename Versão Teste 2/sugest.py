@@ -1,5 +1,3 @@
-
-from flask import request, jsonify
 from Dadosgoogledrive import download_csv
 
 download_csv()
