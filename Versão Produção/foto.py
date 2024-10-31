@@ -5,6 +5,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from googleapiclient.http import MediaFileUpload
+import json
 
 app = Flask(__name__)
 Ftoken = "Ftoken.json"
@@ -27,7 +28,8 @@ def upload_to_drive(file_path):
             token.write(creds.to_json())
     
     service = build('drive', 'v3', credentials=creds)
-    FOLDER_ID = '1KYUWJvS2adgo8bJzzmwfCBLY7Fa9qPD2' 
+    with open('Foto.json') as json_file:
+        FOLDER_ID = json.load(json_file)['SECRET_KEY'] 
     file_metadata = {
         'name': os.path.basename(file_path),
         'parents': [FOLDER_ID]
