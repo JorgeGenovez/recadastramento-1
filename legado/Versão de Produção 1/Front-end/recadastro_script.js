@@ -38,7 +38,7 @@ const app = Vue.createApp({
         }
     },
     mounted() {
-        const socket = io(""http://delport.com.br:8025", {
+        const socket = io("http://delport.com.br:8025", {
             query: { token: localStorage.token }
         });
 
