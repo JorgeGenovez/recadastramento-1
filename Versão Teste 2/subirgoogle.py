@@ -9,12 +9,12 @@ from googleapiclient.errors import HttpError
 Stoken = "Stoken.json"
 CLIENT_SECRET_FILE = "credentials.json"
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
-with open('Spreadsheet.json') as json_file:
+with open('SpreadsheetNovo.json') as json_file:
     SPREADSHEET_ID = json.load(json_file)['SECRET_KEY']
-RANGE_NAME = "DadosNovo2!A1:AY3000"
+RANGE_NAME = "Novos Membros2!A1:AY3000"
 
-def confirmando(dados, link, quem_cadastrou):
-    
+def confirmandoNovo(dados, link, quem_cadastrou):
+
     if os.path.exists(Stoken):
         creds = Credentials.from_authorized_user_file(Stoken, SCOPES)
         
@@ -32,7 +32,7 @@ def confirmando(dados, link, quem_cadastrou):
         sheet = service.spreadsheets()
 
         dados = {
-                "Foto": [str(link)],
+               "Foto": [str(link)],
                 "Nome Completo": [str(dados['nome_completo'])],
                 "Matrícula": [str(dados['matricula'])], 
                 #"CPF": [str(dados['cpf'])], 
