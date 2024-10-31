@@ -1,4 +1,5 @@
 import os
+import json
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
@@ -8,7 +9,8 @@ from googleapiclient.errors import HttpError
 Stoken = "Stoken.json"
 CLIENT_SECRET_FILE = "credentials.json"
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
-SPREADSHEET_ID = "197dGyWjtAVUVR2K8eODfIxfrEFgeErTcxMhp3OIX8N0"
+with open('Spreadsheet.json') as json_file:
+    SPREADSHEET_ID = json.load(json_file)['SECRET_KEY']
 RANGE_NAME = "DadosNovo2!A1:AY3000"
 
 def confirmando(dados, link, quem_cadastrou):
