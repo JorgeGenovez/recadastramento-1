@@ -9,7 +9,7 @@ const app = Vue.createApp({
     methods: {
         async handle_submit_login()
         {
-            const promise = await fetch('http://localhost:8025/login', {
+            const promise = await fetch('http://delport.com.br:8025/login', {
                 method: 'POST',
                 body: new URLSearchParams({
                     usuario: this.usuario,
@@ -23,7 +23,7 @@ const app = Vue.createApp({
                 return
             }
             localStorage.setItem('token', resp.token)
-            window.location.href = `opcoes.html`
+            window.location.href = `https://cadastro.pibpavuna.com.br/opcoes.html`
         }   
     }
 })
