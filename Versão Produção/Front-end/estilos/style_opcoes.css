@@ -1,0 +1,28 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto';
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#conteiner_opcoes {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.opcao {
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    background-color: #d0d1d1;
+    padding: 10px 16px;
+    border-radius: 23px;
+    text-align: center;
+}
