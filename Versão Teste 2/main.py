@@ -1,6 +1,7 @@
 from flask import Flask,request, jsonify,g 
 from flask_socketio import SocketIO, disconnect, emit
 import jwt
+import json
 import datetime
 from functools import wraps
 from flask_cors import CORS
@@ -16,8 +17,10 @@ from subirgoogleNovo import confirmandoNovo
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins=["http://127.0.0.1:5500"])
 CORS(app)
-SECRET_KEY = 'KJBlkjbKLGbNKGufjhB3s4s654dsa354fgGBKlm54654KJEHGIRNTHRTH54R6H544865iohKG'
-
+#------------------------------------------------
+with open('secret_key.json') as json_file:
+    SECRET_KEY = json.load(json_file)['SECRET_KEY']
+#-------------------------------------------------
 usuarios = [
     {"nome": "admin", "senha": "1234"},
 ]
