@@ -19,7 +19,7 @@ const app = Vue.createApp({
         },
         async buscar_por_membro(membro)
         {
-            const promise = await fetch(`http://localhost:8025/buscar_por_membro`, {
+            const promise = await fetch(`http://delport.com.br:8025/buscar_por_membro`, {
                 method: 'POST',
                 body: new URLSearchParams({
                     nome: membro
@@ -32,13 +32,13 @@ const app = Vue.createApp({
             localStorage.setItem('membro', JSON.stringify(resp));
             this.membro = resp
             this.opcoes_membros = []
-            window.location.href = `formulario.html`
+            window.location.href = `https://cadastro.pibpavuna.com.br/formulario.html`
             console.log(resp)
     
         }
     },
     mounted() {
-        const socket = io("http://localhost:8025", {
+        const socket = io("http://delport.com.br:8025", {
             query: { token: localStorage.token }
         });
 
