@@ -3,7 +3,6 @@ class Variavel:
         self.value = ""
 
 rua = Variavel()
-complemento = Variavel()
 bairro = Variavel()
 municipio = Variavel()
 estado = Variavel()
