@@ -1,30 +1,31 @@
 import os
+import json
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
+Stoken = "Stoken.json"
+CLIENT_SECRET_FILE = "credentials.json"
+SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
+with open('SpreadsheetNovo.json') as json_file:
+    SPREADSHEET_ID = json.load(json_file)['SECRET_KEY']
+RANGE_NAME = "Novos Membros2!A1:AY3000"
 
 def confirmandoNovo(dados, link, quem_cadastrou):
-    SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
-    SPREADSHEET_ID = "1GhOkJsfFewYUNJtQ9fA8MU9Z8UvJUAl2M15EAxtGGOI"
-    RANGE_NAME = "Novos Membros2!A1:AY3000"
-
-    creds = None
-    Stoken = "Stoken.json"
 
     if os.path.exists(Stoken):
         creds = Credentials.from_authorized_user_file(Stoken, SCOPES)
-
-    if not creds or not creds.valid:
+        
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
-        else:
-            flow = InstalledAppFlow.from_client_secrets_file("credentials.json", SCOPES)
-            creds = flow.run_local_server(port=0)
-
-        with open(Stoken, "w") as token:
+            with open(Stoken, 'w') as token:
+                token.write(creds.to_json())
+    else:
+        flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRET_FILE, SCOPES)
+        creds = flow.run_local_server(port=0)
+        with open(Stoken, 'w') as token:
             token.write(creds.to_json())
     try:
         service = build("sheets", "v4", credentials=creds)
