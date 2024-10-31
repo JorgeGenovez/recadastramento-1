@@ -26,7 +26,7 @@ const app = Vue.createApp({
     },
     methods: {
         voltaropcao(){
-            window.location.href = `opcoes.html`
+            window.location.href = `https://cadastro.pibpavuna.com.br/opcoes.html`
         },
         carregarMembro() {
             const membroData = localStorage.getItem('membro');
@@ -94,7 +94,7 @@ const app = Vue.createApp({
             formData.append("data_de_nascimento_do_filho5", document.getElementsByName('data_de_nascimento_do_filho5')[0].value)
 
             this.guia_atual = 'tela_de_load'
-            const promise = await fetch('http://localhost:8025/salvar_membro', {
+            const promise = await fetch('http://delport.com.br:8025/salvar_membro', {
                 method: 'POST',
                 body: formData,
                 headers: {
@@ -103,7 +103,7 @@ const app = Vue.createApp({
             });
             const response = await promise.json()
             this.formData = response
-            window.location.href = `opcoes.html`
+            window.location.href = `http://delport.com.br:8025/consultar_cep`
         },
         async consultar_cep()
         {
@@ -126,7 +126,7 @@ const app = Vue.createApp({
         }
     },
     mounted() {
-        const socket = io("http://localhost:8025", {
+        const socket = io("http://delport.com.br:8025", {
             query: { token: localStorage.token }
         });
 
